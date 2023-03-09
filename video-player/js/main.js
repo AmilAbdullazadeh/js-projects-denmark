@@ -37,21 +37,17 @@ skipBtns.forEach(btn => {
   btn.addEventListener("click", updateTime)
 })
 
+let isMousedown = false
 
+progress.addEventListener("mousedown", () => changeStatus(true));
+progress.addEventListener("mouseup", () => changeStatus(false));
+progress.addEventListener('mousemove', (e) => isMousedown && scrub(e))
 
+function changeStatus(propsArg) {
+  isMousedown = propsArg;
+}
 
-
-// let isMousedown = false;
-// progress.addEventListener("click", scrub);
-// progress.addEventListener("mousedown", () => handleMouseEvent(true));
-// progress.addEventListener("mousemove", (event) => isMousedown && scrub(event));
-// progress.addEventListener("mouseup", () => handleMouseEvent(false));
-
-// function handleMouseEvent(handleProps) {
-//   isMousedown = handleProps;
-// }
-
-// function scrub(event) {
-//   const scrubTime = (event.offsetX / progress.offsetWidth) * video.duration;
-//   video.currentTime = scrubTime;
-// }
+function scrub(e) { 
+  let clickedTime = (e.offsetX / progress.offsetWidth) * video.duration
+  video.currentTime = clickedTime
+ }
