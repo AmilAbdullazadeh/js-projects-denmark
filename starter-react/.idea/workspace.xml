@@ -31,7 +31,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.standard" value="true" />
@@ -47,6 +47,9 @@
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src" />
       <recent name="$PROJECT_DIR$/src/components/MenuList" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
     </key>
   </component>
   <component name="RunManager" selected="npm.prettier">
@@ -89,7 +92,10 @@
       <workItem from="1679585290304" duration="110000" />
       <workItem from="1679585419526" duration="416000" />
       <workItem from="1679921080530" duration="5063000" />
-      <workItem from="1679928305387" duration="3423000" />
+      <workItem from="1679928305387" duration="3722000" />
+      <workItem from="1679979259553" duration="159000" />
+      <workItem from="1680016707381" duration="2105000" />
+      <workItem from="1680020378290" duration="90000" />
     </task>
     <servers />
   </component>
