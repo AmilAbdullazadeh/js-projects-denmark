@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 //Components
 import { Logo } from "./components/Logo"
 import {TVShowDetail} from "./components/TVShowDetail";
+import {TVShowList} from "./components/TVShowList";
+import { SearchBar } from "./components/Search"
 
 import { TVShowAPI } from "./api/tv-shows";
 import s from "./style.module.css";
@@ -10,7 +12,7 @@ import { BACKDROP_BASE_URL } from "./config"
 
 //Img
 import logImg from "./assets/img/Screen Shot 2023-03-29 at 17.54.26.png"
-import {TVShowList} from "./components/TVShowList";
+import {Search} from "react-bootstrap-icons";
 
 
 export function App() {
@@ -30,6 +32,15 @@ export function App() {
     try {
       const res = await TVShowAPI.recommendedTVShows(tv_id)
       setRecommandtionTvShows(res)
+    } catch (err) {
+      console.log(err.status_message)
+    }
+  }
+
+  async function searchTVShows(title) {
+    try {
+      const res = await TVShowAPI.searchTVShows(title)
+      setCurrentTVShow(res)
     } catch (err) {
       console.log(err.status_message)
     }
@@ -63,7 +74,7 @@ export function App() {
               <Logo title='8K Movies' subtitle='8k Movies' img={logImg} />
             </div>
             <div className="col-md-12 col-lg-4">
-            {/* Search */}
+            <SearchBar handleSearch={searchTVShows} />
             </div>
           </div>
         </div>
