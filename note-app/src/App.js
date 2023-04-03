@@ -1,16 +1,38 @@
 import React from 'react';
-import { addExpense } from './features/expense/expenseSlice'
 import {useDispatch} from "react-redux";
+
+import s from "./style.module.css";
+
+//components
+import { Logo } from "./components/Logo/Logo"
+import { IncomeInput } from "./containers/IncomeInput/IncomeInput"
+import { ExpenseInput } from "./containers/ExpenseInput/ExpenseInput"
 
 function App() {
 
-  const dispatch = useDispatch()
-
-
   return (
-    <div onClick={() => dispatch(addExpense())} className="App">
-        Tools
+    <div className={s.main_container}>
+        <div className={`row ${s.header}`}>
+            <div className={`col-3`}>
+                <Logo title='My Title' subtitle='Hello my friend !' />
+            </div>
+            <div className={`col-9 ${s.income_input}`}>
+                <IncomeInput />
+            </div>
+        </div>
+        <div className={`row ${s.workspace}`}>
+            <div className={`col-12  ${s.expense_input}`}>
+                <ExpenseInput />
+            </div>
+            <div className={`col-11 col-md-6 col-lg-4 ${s.expense_list}`}>
+                {/*ExpenseList*/}
+                <div className={`col-12 ${s.expense_total}`}>
+                    {/*ExpenseTotal*/}
+                </div>
+            </div>
+        </div>
     </div>
+
   );
 }
 
