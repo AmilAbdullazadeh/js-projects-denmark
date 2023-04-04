@@ -1,7 +1,9 @@
-import { List } from "components/List/List";
 import { useSelector } from "react-redux";
 
+import { List } from "../../components/List/List"
+
 export function ExpenseList() {
-// expenseList selector
-// List items
+  const expenseList = useSelector(state => state.expense.exepenseList)
+
+  return <List items={expenseList} />
 }

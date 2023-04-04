@@ -7,6 +7,10 @@ import s from "./style.module.css";
 import { Logo } from "./components/Logo/Logo"
 import { IncomeInput } from "./containers/IncomeInput/IncomeInput"
 import { ExpenseInput } from "./containers/ExpenseInput/ExpenseInput"
+import { ExpenseList } from "./containers/ExpenseList/ExpenseList"
+import { ExpenseTotal } from "./containers/ExpenseTotal/ExpenseTotal"
+
+
 
 function App() {
 
@@ -25,9 +29,9 @@ function App() {
                 <ExpenseInput />
             </div>
             <div className={`col-11 col-md-6 col-lg-4 ${s.expense_list}`}>
-                {/*ExpenseList*/}
+                <ExpenseList />
                 <div className={`col-12 ${s.expense_total}`}>
-                    {/*ExpenseTotal*/}
+                    <ExpenseTotal />
                 </div>
             </div>
         </div>

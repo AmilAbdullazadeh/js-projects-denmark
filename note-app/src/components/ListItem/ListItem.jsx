@@ -1,10 +1,10 @@
 import s from "./style.module.css";
 
-export function ListItem(props) {
+export function ListItem({item}) {
   return (
     <tr>
-      <th>name</th>
-      <td className={s.price}>price $</td>
+      <th>{item.name}</th>
+      <td className={s.price}>{item.price} $</td>
     </tr>
   );
 }

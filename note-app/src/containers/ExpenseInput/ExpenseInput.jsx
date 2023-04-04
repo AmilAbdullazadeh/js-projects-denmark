@@ -6,7 +6,7 @@ import s from "./style.module.css";
 import { addExpense } from "../../store/expense/expense-slice";
 
 export function ExpenseInput(props) {
-const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const [name, setName] = useState("");
   const [price, setPrice] = useState(0);
 

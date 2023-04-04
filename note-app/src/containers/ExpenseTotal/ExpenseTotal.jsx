@@ -2,20 +2,22 @@ import { useSelector } from "react-redux";
 import s from "./style.module.css";
 
 export function ExpenseTotal(props) {
-    // income useSelector
-  // expenseList selector
+    const income = useSelector(state => state.expense.income)
+    const expenseList = useSelector(state => state.expense.exepenseList)
 
-// totalExpense with reducer acc and expense.price with initial 0 value
-// remainingMoney
+
+    const totalExpense = expenseList.reduce((acc, expense) => acc + Number.parseFloat(expense.price), 0)
+    const remainingMoney = income - totalExpense
+
   return (
     <div>
       <div className="row">
         <div className={`col ${s.label}`}>Total expenses</div>
-        <div className={`col ${s.amount}`}>totalExpense $</div>
+        <div className={`col ${s.amount}`}>{totalExpense} $</div>
       </div>
       <div className="row">
         <div className={`col ${s.label}`}>Remaining money</div>
-        <div className={`col ${s.amount}`}>remainingMoney $</div>
+        <div className={`col ${s.amount}`}>{remainingMoney} $</div>
       </div>
     </div>
   );
