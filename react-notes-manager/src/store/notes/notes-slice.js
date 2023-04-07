@@ -6,12 +6,14 @@ export const noteSlice = createSlice({
     noteList: [],
   },
   reducers: {
-    // setNoteList
+    setNoteList: (state, action) => {
+      state.noteList = action.payload;
+    },
     // addNote
     // updateNote
     // deleteNote
   },
 });
 
-// export const {  } = noteSlice.actions;
+export const { setNoteList } = noteSlice.actions;
 export const noteReducer = noteSlice.reducer;
