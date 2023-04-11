@@ -2,19 +2,23 @@ import { useState } from "react";
 import { Trash } from "react-bootstrap-icons";
 import s from "./style.module.css";
 
-export function TextCard({ title, subtitle, content }) {
+export function TextCard({ title, subtitle, content, id, onClickTrash, onClick }) {
   const [isCardHovered, setIsCardHovered] = useState(false);
   const [isTrashHovered, setIsTrashHovered] = useState(false);
 
 
   function onClickTrash_(e) {
-    console.log("trash");
+    onClickTrash(id)
     e.stopPropagation();
+  }
+
+  const handleClick = () => {
+    onClick(id);
   }
 
   return (
     <div
-      // onClick
+      onClick={handleClick}
       className={`card ${s.container}`}
       style={{ borderColor: isCardHovered ? "#0d6efd" : "transparent" }}
       onMouseEnter={() => setIsCardHovered(true)}

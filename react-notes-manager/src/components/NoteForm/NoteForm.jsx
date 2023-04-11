@@ -14,58 +14,49 @@ const VALIDATOR = {
   },
 };
 
-export function NoteForm({
-  isEditable = true,
-  note,
-  title,
-  onClickEdit,
-  onClickDelete,
-  onSubmit,
-}) {
-  const [formValues, setFormValues] = useState({
-    title: note?.title || "",
-    content: note?.content || ""
-  });
-  const [formErrors, setFormErrors] = useState({
-    title: note?.title ? undefined : true,
-    content: note?.content ? undefined : true
-  });
 
-  const updateFormValues = (e) => {
-    const name = e.target.name;
-    const value = e.target.value;
+export function NoteForm({ submit, title, note, isEditable }) {
+    const [formValues, setFormValues] = useState({title: note?.title, content: note?.content});
+    const [formErrors, setFormErrors] = useState({title: '', content: ''});
 
-    setFormValues({ ...formValues, [name]: value });
+function updateFormValues(e) {
+    const {name, value} = e.target;
+    setFormValues({...formValues, [name]: value});
     validate(name, value);
-  };
+}
 
-  const validate = (fieldName, fieldValue) => {
+function validate(fieldName, fieldValue) {
     setFormErrors({
       ...formErrors,
       [fieldName]: VALIDATOR[fieldName](fieldValue),
     });
-  };
+}
 
-  const hasError = () => {
-    for (const fieldName in formErrors) {
-      if (formErrors[fieldName]) {
-        return true;
-      }
-    }
-    return false;
-  };
+function hasError() {
+    return Object.values(formErrors).some((err) => err);
+}
+
   const actionIcons = (
     <>
       <div className="col-1">
-        {onClickEdit && <PencilFill onClick={onClickEdit} className={s.icon} />}
+        {isEditable && (
+          <PencilFill
+            //          onClick
+            className={s.icon}
+          />
+        )}
       </div>
       <div className="col-1">
-        {onClickDelete && (
-          <TrashFill onClick={onClickDelete} className={s.icon} />
+        {isEditable && (
+          <TrashFill
+            //            onClick
+            className={s.icon}
+          />
         )}
       </div>
     </>
   );
+
   const titleInput = (
     <div className="mb-5">
       <label className="form-label">Title</label>
@@ -74,11 +65,12 @@ export function NoteForm({
         type="text"
         name="title"
         className="form-control"
-        value={formValues.title}
+        defaultValue={formValues.title}
       />
       <FieldError msg={formErrors.title} />
     </div>
   );
+
   const contentInput = (
     <div className="mb-5">
       <label className="form-label">Content</label>
@@ -88,7 +80,7 @@ export function NoteForm({
         name="content"
         className="form-control"
         row="5"
-        value={formValues.content}
+        defaultValue={formValues.content}
       />
       <FieldError msg={formErrors.content} />
     </div>
@@ -96,12 +88,9 @@ export function NoteForm({
 
   const submitBtn = (
     <div className={s.submit_btn}>
-      <ButtonPrimary
-        isDisabled={hasError()}
-        onClick={() => onSubmit(formValues)}
-      >
-        Submit
-      </ButtonPrimary>
+        <ButtonPrimary isDisabled={!hasError()} onClick={() => submit({...formValues, created_at: new Date().toLocaleDateString()})}>
+            Add
+        </ButtonPrimary>
     </div>
   );
 
@@ -114,12 +103,13 @@ export function NoteForm({
         {actionIcons}
       </div>
       <div className={`mb-3 ${s.title_input_container}`}>
-        {isEditable && titleInput}
+        {titleInput}
       </div>
       <div className="mb-3">
-        {isEditable ? contentInput : <pre>{note.content}</pre>}
+         {contentInput} :
+{/*           <pre>content</pre> */}
       </div>
-      {onSubmit && submitBtn}
+      {submitBtn}
     </div>
   );
 }

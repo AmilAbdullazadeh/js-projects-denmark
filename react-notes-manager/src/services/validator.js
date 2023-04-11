@@ -1,13 +1,13 @@
 export class ValidatorService {
-  static min(inputValue, min) {
-    if (inputValue.length < min) {
-      return `Can't be less than ${min} characters`;
+  static min(inputValue, limit) {
+    if (inputValue.length < limit) {
+      return `The value must be greater than ${limit}`
     }
   }
 
-  static max(inputValue, max) {
-    if (inputValue.length > max) {
-      return `Can't be more than ${max} characters`;
+  static max(inputValue, limit) {
+    if (inputValue.length > limit) {
+      return `The value must be less than ${limit}`
     }
   }
 }
