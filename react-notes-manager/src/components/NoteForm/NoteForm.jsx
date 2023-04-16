@@ -15,44 +15,48 @@ const VALIDATOR = {
 };
 
 
-export function NoteForm({ submit, title, note, isEditable }) {
-    const [formValues, setFormValues] = useState({title: note?.title, content: note?.content});
-    const [formErrors, setFormErrors] = useState({title: '', content: ''});
+export function NoteForm({
+  onSubmit,
+  deleteNote_,
+  title,
+  note,
+  id,
+  isEditable = false,
+  handleChangeEdit,
+}) {
+  const [formValues, setFormValues] = useState({
+    title: note?.title,
+    content: note?.content,
+  });
+  const [formErrors, setFormErrors] = useState({ title: "", content: "" });
 
-function updateFormValues(e) {
-    const {name, value} = e.target;
-    setFormValues({...formValues, [name]: value});
+  function updateFormValues(e) {
+    const { name, value } = e.target;
+    setFormValues({ ...formValues, [name]: value });
     validate(name, value);
-}
+  }
 
-function validate(fieldName, fieldValue) {
+  function validate(fieldName, fieldValue) {
     setFormErrors({
       ...formErrors,
       [fieldName]: VALIDATOR[fieldName](fieldValue),
     });
-}
+  }
 
-function hasError() {
+  function hasError() {
     return Object.values(formErrors).some((err) => err);
-}
+  }
 
   const actionIcons = (
     <>
       <div className="col-1">
-        {isEditable && (
-          <PencilFill
-            //          onClick
-            className={s.icon}
-          />
-        )}
+        <PencilFill onClick={() => handleChangeEdit()} className={s.icon} />
       </div>
       <div className="col-1">
-        {isEditable && (
-          <TrashFill
-            //            onClick
-            className={s.icon}
-          />
-        )}
+        <TrashFill
+          onClick = {() => deleteNote_()}
+          className={s.icon}
+        />
       </div>
     </>
   );
@@ -65,9 +69,9 @@ function hasError() {
         type="text"
         name="title"
         className="form-control"
-        defaultValue={formValues.title}
+        defaultValue={formValues?.title}
       />
-      <FieldError msg={formErrors.title} />
+      <FieldError msg={formErrors?.title} />
     </div>
   );
 
@@ -80,17 +84,22 @@ function hasError() {
         name="content"
         className="form-control"
         row="5"
-        defaultValue={formValues.content}
+        defaultValue={formValues?.content}
       />
-      <FieldError msg={formErrors.content} />
+      <FieldError msg={formErrors?.content} />
     </div>
   );
 
   const submitBtn = (
     <div className={s.submit_btn}>
-        <ButtonPrimary isDisabled={!hasError()} onClick={() => submit({...formValues, created_at: new Date().toLocaleDateString()})}>
-            Add
-        </ButtonPrimary>
+      <ButtonPrimary
+        isDisabled={hasError()}
+        onClick={() =>
+          onSubmit(formValues)
+        }
+      >
+        Add
+      </ButtonPrimary>
     </div>
   );
 
@@ -100,16 +109,15 @@ function hasError() {
         <div className="col-10">
           <h2 className="mb-3">{title}</h2>
         </div>
-        {actionIcons}
+        {true && actionIcons}
       </div>
       <div className={`mb-3 ${s.title_input_container}`}>
-        {titleInput}
+        {isEditable ? titleInput : note?.title}
       </div>
       <div className="mb-3">
-         {contentInput} :
-{/*           <pre>content</pre> */}
+        {isEditable ? contentInput : <pre>{note?.content}</pre>}
       </div>
-      {submitBtn}
+      {isEditable && submitBtn}
     </div>
   );
 }

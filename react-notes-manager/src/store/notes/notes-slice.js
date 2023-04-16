@@ -18,7 +18,7 @@ export const noteSlice = createSlice({
         state.noteList[index] = action.payload;
     },
     deleteNote: (state, action) => {
-        const index = state.noteList.findIndex(note => note.id === action.payload.id);
+        const index = state.noteList.findIndex(note => note.id === action.payload);
         state.noteList.splice(index, 1);
     }
   },

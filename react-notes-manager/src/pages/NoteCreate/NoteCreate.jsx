@@ -8,18 +8,11 @@ export function NoteCreate(props) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-    async function submit(note) {
-        const res = await NoteAPI.create(note);
-        dispatch(addNote(res));
-        navigate("/");
-    }
+  async function submit(note) {
+    const res = await NoteAPI.create({...note, created_at: new Date().toLocaleDateString()});
+    dispatch(addNote(res));
+    navigate("/");
+  }
 
-  return (
-    <>
-      <NoteForm
-        title="New note"
-        submit={submit}
-      />
-    </>
-  );
+  return <NoteForm title="New note" onSubmit={submit} />;
 }

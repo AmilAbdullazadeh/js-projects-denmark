@@ -24,7 +24,7 @@ export class NoteAPI {
   //! url => localhost:3200/notes/1, data => {id: 1, title: "Note 1", content: "Content 1"}
 
   static async delete(id) {
-    return this.formatId((await axios.delete(`${BASE_URL}/${id}`)).data);
+    return await axios.delete(`${BASE_URL}/${id}`).data;
   }
 
   //! url => localhost:3200/notes/1
