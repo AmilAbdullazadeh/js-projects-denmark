@@ -28,7 +28,7 @@ export function NoteList({ noteList }) {
           <TextCard
             id={note.id}
             title={note.title}
-            subtitle={note.created_at}
+            subtitle={note.updated_at ? note.updated_at : note.created_at}
             content={note.content}
             onClickTrash={deleteNote}
             onClick={goToNote}

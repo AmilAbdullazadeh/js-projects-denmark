@@ -50,13 +50,10 @@ export function NoteForm({
   const actionIcons = (
     <>
       <div className="col-1">
-        <PencilFill onClick={() => handleChangeEdit()} className={s.icon} />
+        { handleChangeEdit && <PencilFill onClick={() => handleChangeEdit()} className={s.icon} />}
       </div>
       <div className="col-1">
-        <TrashFill
-          onClick = {() => deleteNote_()}
-          className={s.icon}
-        />
+        { deleteNote_ && <TrashFill onClick={() => deleteNote_()} className={s.icon} />}
       </div>
     </>
   );
@@ -69,7 +66,7 @@ export function NoteForm({
         type="text"
         name="title"
         className="form-control"
-        defaultValue={formValues?.title}
+        value={formValues?.title}
       />
       <FieldError msg={formErrors?.title} />
     </div>
@@ -84,7 +81,7 @@ export function NoteForm({
         name="content"
         className="form-control"
         row="5"
-        defaultValue={formValues?.content}
+        value={formValues?.content}
       />
       <FieldError msg={formErrors?.content} />
     </div>
@@ -117,7 +114,7 @@ export function NoteForm({
       <div className="mb-3">
         {isEditable ? contentInput : <pre>{note?.content}</pre>}
       </div>
-      {isEditable && submitBtn}
+      {onSubmit && submitBtn}
     </div>
   );
 }

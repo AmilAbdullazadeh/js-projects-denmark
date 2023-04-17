@@ -15,17 +15,23 @@ export function Note(props) {
   const note = useSelector((state) => state.noteSlice.noteList.find((note) => note.id === id.toString()));
 
   const submit = async (formValues) => {
-        const res = await NoteAPI.update(formValues);
+    const res = await NoteAPI.update({
+      ...formValues,
+      created_at: note?.created_at,
+      updated_at: new Date().toLocaleDateString(),
+      id
+    });
         dispatch(updateNote(res));
-        setIsEditable(false);
+    setIsEditable(false);
+    navigate("/");
   };
 
   const handleChangeEdit = () => {
     setIsEditable(!isEditable);
   };
 
-  function deleteNote_() {
-    // await NoteAPI.delete(id);
+  async function deleteNote_() {
+    await NoteAPI.delete(id);
     dispatch(deleteNote(id));
     navigate("/");
   }
@@ -34,7 +40,7 @@ export function Note(props) {
     <>
       {note && (
         <NoteForm
-          isEditable={true}
+          isEditable={isEditable}
           handleChangeEdit={handleChangeEdit}
           title={isEditable ? "Update note" : note.title}
           note={note}

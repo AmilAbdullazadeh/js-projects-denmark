@@ -9,10 +9,16 @@ export function NoteCreate(props) {
   const navigate = useNavigate();
 
   async function submit(note) {
-    const res = await NoteAPI.create({...note, created_at: new Date().toLocaleDateString()});
+    const res = await NoteAPI.create(
+      {
+        ...note,
+        created_at: new Date().toLocaleDateString(),
+        updated_at: ''
+      }
+    );
     dispatch(addNote(res));
     navigate("/");
   }
 
-  return <NoteForm title="New note" onSubmit={submit} />;
+  return <NoteForm title="New note" onSubmit={submit} isEditable />;
 }
