@@ -1,0 +1,10 @@
+.root{
+    display:flex;
+    align-items:center;
+    flex-direction: column;
+    padding:20px;
+}
+
+h2{
+  margin-bottom: 40px;  
+}

@@ -1,0 +1,43 @@
+.img {
+    height: 300px;
+    width: 500px;
+}
+
+button{
+    background-color: black;
+    border-radius: 20px;
+    color:white;
+    padding: 3px 15px;
+}
+.card {
+    border-radius: 40px;
+    overflow: hidden;
+}
+
+.card_banner {
+    display: flex;
+    gap: 2em;
+    padding: 1em;
+}
+
+.card_thumb {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+.card_title {
+    font-size: 1em;
+    color: black;
+    text-align: left;
+}
+
+.card_subtitle {
+    font-size: .8em;
+    color: black;
+    margin-bottom: 7px;
+}
+
+.card_text{
+    text-align: left;
+}
